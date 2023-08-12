@@ -1,0 +1,39 @@
+﻿@model PagedResult<UserModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+
+    <div class="col-12">
+        <div class="accordion mb-3 shadow-sm" id="accordion-filter-table">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-filter-table-content" aria-expanded="true" aria-controls="accordion-filter-table-content">
+                        <i class="fa-solid fa-search"></i> <span class="ms-3 d-inline">Search</span>
+                    </button>
+                </h2>
+                <div id="accordion-filter-table-content" class="accordion-collapse collapse show p-3" data-bs-parent="#accordion-filter-table">
+                        <form id="user-filter">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="Name" class="form-label">Name</label>
+                                    <input name="Name" type="text" class="form-control" />
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary text-white mt-3" onclick="Search()">
+                                        <i class="fa-solid fa-search me-2 text-white"></i> Search
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @await Html.PartialAsync("_UserTableResult", Model)
+
+</div>

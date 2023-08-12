@@ -1,0 +1,25 @@
+﻿@model SortTableModel
+
+@if (Model != null && Model.TotalPages > 1)
+{
+    <div>
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                    <a class="page-link" onclick="GetPagedResult('@Url.Action(Model.Action, Model.Controller)',@Model.Page - 1, '@Model.SortProperty',@Model.SortAscending.ToString().ToLower(), '@Model.FormFilterId')">Anterior</a>
+                </li>
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(Model.Page == i ? "active" : "")">
+                        <a class="page-link" onclick="GetPagedResult('@Url.Action(Model.Action, Model.Controller)',@i, '@Model.SortProperty',@Model.SortAscending.ToString().ToLower(), '@Model.FormFilterId')">@i</a>
+                    </li>
+                }
+
+                <li class="page-item @(Model.Page == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" onclick="GetPagedResult('@Url.Action(Model.Action, Model.Controller)',@Model.Page + 1, '@Model.SortProperty',@Model.SortAscending.ToString().ToLower(), '@Model.FormFilterId')">Próximo</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+}

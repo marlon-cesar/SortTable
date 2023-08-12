@@ -1,0 +1,21 @@
+﻿@model PagedResult<UserModel>
+
+@{
+    var sortProperty = ViewData["SortProperty"]?.ToString();
+    var sortAscending = ((bool?)ViewData["SortAscending"]).GetValueOrDefault();
+}
+
+<div class="col-12" id="content-result">
+    <div class="accordion mb-3 shadow-sm" id="accordion-users-table">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-users-table-content" aria-expanded="true" aria-controls="accordion-users-table-content">
+                    <i class="fa-solid fa-table"></i> <span class="ms-3 d-inline">Users</span>
+                </button>
+            </h2>
+            <div id="accordion-users-table-content" class="accordion-collapse collapse show p-3" data-bs-parent="#accordion-users-table">
+                @await Component.InvokeAsync("SortTable", new { pagedResult = Model, options = new SortTableOptions(typeof(UserModel), "Home", "FilterUsers", sortProperty, sortAscending, "user-filter") })
+            </div>
+        </div>
+    </div>
+</div>
